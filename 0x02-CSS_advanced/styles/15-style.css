@@ -187,8 +187,11 @@ template {
     --section-title-color: var(--color-black);
 }
 
-html {
+.container {
     box-sizing: content-box;
+}
+
+html {
     scroll-behavior: smooth;
     font-size: 62.5%;
 }
