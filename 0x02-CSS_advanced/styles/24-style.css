@@ -373,7 +373,7 @@ ul.row {
 }
 
 .card-title .card-services {
-    margin: 0;
+    margin: none;
 }
 
 .card-services a {
