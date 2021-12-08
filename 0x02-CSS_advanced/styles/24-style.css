@@ -372,8 +372,8 @@ ul.row {
     fill: var(--text-color);
 }
 
-.card-title .card-services {
-    margin: none;
+.card-services .card-title {
+    margin: 0;
 }
 
 .card-services a {
