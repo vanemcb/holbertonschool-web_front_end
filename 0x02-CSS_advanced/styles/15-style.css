@@ -187,11 +187,8 @@ template {
     --section-title-color: var(--color-black);
 }
 
-.box {
-    box-sizing: content-box;
-}
-
 html {
+    box-sizing: content-box;
     scroll-behavior: smooth;
     font-size: 62.5%;
 }
