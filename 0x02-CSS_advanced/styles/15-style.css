@@ -187,7 +187,7 @@ template {
     --section-title-color: var(--color-black);
 }
 
-.container {
+* {
     box-sizing: content-box;
 }
 
