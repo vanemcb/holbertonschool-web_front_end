@@ -246,8 +246,8 @@ a:active {
 
 .container {
     width: 960px;
-    margin-right: auto;
-    margin-left: auto;
+    margin-right: 1;
+    margin-left:1;
 }
 
 .section-header {
