@@ -667,8 +667,8 @@ ul.row {
 }
 
 /*** ARTICLE PAGE ***/
-/* Section HERO (article)
-    ============================= */
+
+/* Section HERO (article) ============================= */
 
 .hero-article {
     background-size: 150rem 100rem;
@@ -702,8 +702,7 @@ ul.row {
     padding: 5rem 0;
 }
 
-/* Post
-    ============================= */
+/* Post ============================= */
 
 .post {
     display: flex;
