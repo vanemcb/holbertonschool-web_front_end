@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    justify-content: center;
+    background-color: yellow;
+    height: 10rem;
+    width: 20rem;
+}
+
+.box1 {
+    background: rgb(72, 214, 72);
+    color: white;
+}
+
+.box2 {
+    background: rgb(57, 147, 207);
+    color: white;
+}
+
+.box3 {
+    background: rgb(21, 21, 56);
+    color: white;
+}
+
+.box4 {
+    background: rgb(120, 76, 161);
+    color: white;
+}
+
+.box5 {
+    background: chocolate;
+    color: white;
+}
