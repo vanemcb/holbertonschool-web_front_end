@@ -1,1 +1,0 @@
-*Repository containing the projects of the Full-Stack Web Development program*
