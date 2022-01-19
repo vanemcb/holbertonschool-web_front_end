@@ -21,16 +21,16 @@ function main() {
   const btn1 = document.createElement("button");
   btn1.innerHTML = "Spooky";
   document.body.appendChild(btn1);
-  btn1.onclick = changeMode(9, 'bold', 'uppercase', 'pink', 'green');
+  btn1.onclick = function () { spooky() };
 
   const btn2 = document.createElement("button");
   btn2.innerHTML = "Dark mode";
-  btn2.onclick = changeMode(12, 'bold', 'capitalize', 'black', 'white');
+  btn2.onclick = function () { darkMode() };
   document.body.appendChild(btn2);
 
   const btn3 = document.createElement("button");
   btn3.innerHTML = "Scream mode";
-  btn3.onclick = changeMode(12, 'normal', 'lowercase', 'white', 'black');
+  btn3.onclick = function () { screamMode() };
   document.body.appendChild(btn3);
 }
 
