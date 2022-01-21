@@ -12,7 +12,7 @@
 
     <script type="application/javascript">
         window.onload = function createFamilyTree() {
-            table = "<table><tr><th>Firstname</th><th>Lastname</th></tr><tr><td>Guillaume</td><td>Salva</td></tr><tr><td>Paulette</td><td>Salva</td></tr><tr><td>Antoine</td><td>Salva</td></tr></table>"
+            table = "<table><tr><thead><th>Firstname</th><th>Lastname</th></tr></thead><tbody><tr><td>Guillaume</td><td>Salva</td></tr><tr><td>Paulette</td><td>Salva</td></tr><tr><td>Antoine</td><td>Salva</td></tr></tbody></table>"
             $("body").append($(table));
         }
         createFamilyTree();
