@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Task 10</title>
+    <title>Task 11</title>
 
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
         integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous">
@@ -16,6 +16,7 @@
     <script type="application/javascript">
         window.onload = function () {
             listPosts()
+            buildForm()
             function addPostRow(data){
                 $("body").append($('<p></p>'));
                 $("p:last-child").append($('<span></span>').text(`Post created with id ${data.id}, title: ${data.title}, author: ${data.author}`));
@@ -31,6 +32,30 @@
                         alert("Server Error")
                     }
                 }, "json");
+            }
+            function buildForm() {
+                $("body").append($("<form></form>"))
+                $("form").append($("<div></div>"))
+                $("div").append($('<label for="author"></label>').text("Author"))
+                $("div").append($('<input type="text" id="author">'))
+                $("form").append($("<div></div>"))
+                $("div:nth-of-type(2)").append($('<label for="title"></label>').text("Title"))
+                $("div:nth-of-type(2)").append($('<textarea id="title"></textarea>'))
+                $("form").append($('<input type="submit">').click(
+                    function() {
+                        sendForm()
+                    }
+                ))
+            }
+            function sendForm() {
+                $("form").after($("<p></p>").text("About to send the query to the API"))
+                let data = {
+                    title: $("input").first().val(),
+                    author: $("input:nth-of-type(2)").val()
+                }
+                $.post("./db.json", function (data) {
+                    alert(data)
+                });
             }
         }
     </script>
