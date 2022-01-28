@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Task 7</title>
+    <title>Task 8</title>
 
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
         integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous">
@@ -23,26 +23,46 @@
                     }
                 ));
                 $("body").append($('<ul></ul>'));
+                $("body").append($('<ul id="pagination"></ul>').css({'display': 'inline-flex'}));
             }
             function addNewArticle(id, title, snippet) {
-                $("ul").append($("<li></li>"))
+                $("ul:nth-of-type(1)").append($("<li></li>"))
                 $("li:last-child").append($("<p></p>"))
                 $("li:last-child p").append($(`<span>${id} - </span>`))
                 $("li:last-child p span").append($(`<b>${title}</b>`))
                 $("li:last-child").append($(`<p>${snippet}</p>`))
             }
-            function queryWikipedia(search) {
+            function queryWikipedia(search, offset=0) {
                 $.ajax({
-                    url: "http://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=" + search + "&format=json",
+                    url: `http://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${search}&format=json&sroffset=${offset}`,
                     type: 'GET',
                     crossDomain: true,
-                    dataType: 'jsonp', // added data type
+                    dataType: 'jsonp',
                     success: function (res) {
+                        numberOfItems = res.query.searchinfo.totalhits
+                        itemsPerPage = 10
+                        currentOffset = offset
+
                         for (let item of res.query.search) {
                             addNewArticle(item.pageid, item.title, item.snippet)
                         }
+                        buildPagination(numberOfItems, itemsPerPage, currentOffset)
                     }
                 });
+            }
+            function buildPagination(numberOfItems, itemsPerPage, currentOffset) {
+                $("#pagination ").empty()
+                let page = numberOfItems / itemsPerPage
+                for (let i = 1; i <= page; i++) {
+                    $("#pagination").append($(`<li>${i}</li>`).css({ 'cursor': 'pointer', 'margin-left': '10px', 'list-style': 'none' }))
+                }
+                $("#pagination li").click(
+                    function () {
+                        $("ul:nth-of-type(1)").empty()
+                        queryWikipedia($("input").first().val(), $(this).text() * 10)
+                    }
+                )
+                $(`#pagination li:nth-of-type(${currentOffset / 10})`).css('font-weight', 'bold')
             }
             createSearchForm();
         }
