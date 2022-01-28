@@ -42,7 +42,7 @@
                 $("div:nth-of-type(2)").append($('<label for="title"></label>').text("Title"))
                 $("div:nth-of-type(2)").append($('<textarea id="title"></textarea>'))
                 $("form").append($('<input type="submit">').click(
-                    function() {
+                    function () {
                         sendForm()
                     }
                 ))
@@ -50,11 +50,15 @@
             function sendForm() {
                 $("form").after($("<p></p>").text("About to send the query to the API"))
                 let data = {
-                    title: $("input").first().val(),
-                    author: $("input:nth-of-type(2)").val()
+                    title: $("#title").val(),
+                    author: $("#author").val()
                 }
-                $.post("./db.json", function (data) {
-                    alert(data)
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:3000/posts",
+                    data: data,
+                    success: (data) => { addPostRow(data)},
+                    error: (err) => { alert('Error sending the POST query')}
                 });
             }
         }
