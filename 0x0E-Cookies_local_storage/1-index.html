@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Task 1</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous">
+        </script>
+
+    <script type="application/javascript">
+        window.onload = function () {
+            $("body").append($("<h1></h1>").text("Login to the website"))
+            $("body").append($('<input type="text" id="firstname">'));
+            $("body").append($('<input type="text" id="email">'));
+            $("body").append($('<button></button>').text("Log me in").click(
+                () => { setCookies() }
+                ))
+            $("body").append($("<h1></h1>").text("Cookies"))
+            $("body").append($('<button></button>').text("Show the cookies").click(
+                () => { showCookies() }
+            ))
+            function setCookies() {
+                const d = new Date();
+                d.setTime(d.getTime() + (10 * 24 * 60 * 60 * 1000));
+                let expires = "expires=" + d.toUTCString();
+                document.cookie = `firstname=${$("#firstname").val()}; ${expires}`;
+                document.cookie = `email=${$("#email").val()}; ${expires}`;
+                console.log(expires)
+            }
+            function showCookies() {
+                const paragraph = document.createElement("p");
+                paragraph.innerHTML = `Cookies: ${document.cookie}`;
+                document.body.appendChild(paragraph);
+            }
+        }
+    </script>
+
+</head>
+
+<body></body>
+
+</html>
