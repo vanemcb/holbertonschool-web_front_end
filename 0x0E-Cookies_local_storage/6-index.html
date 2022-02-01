@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Task 6</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+    <script type="application/javascript">
+        window.onload = function () {
+            console.log(sessionStorage)
+            let availableItems = ["Shampoo", "Soap", "Sponge", "Water"]
+            if (typeof (Storage) !== "undefined") {
+                createStore()
+                displayCart()
+            } else {
+                alert("Sorry, your browser does not support Web storage. Try again with a better one")
+            }
+            function addItemToCart(item) {
+                sessionStorage.setItem(item, true);
+            }
+            function createStore() {
+                const list = document.createElement("ul");
+                document.body.appendChild(list);
+
+                for (item of availableItems) {
+                    let itemList = document.createElement("li")
+                    list.appendChild(itemList);
+                    itemList.innerHTML = item;
+                    itemList.onclick = () => { addItemToCart(item) };
+                }
+            }
+            function displayCart() {
+                if (sessionStorage.length > 1) {
+                    const paragraph = document.createElement("p");
+                    paragraph.innerHTML = `You previously had ${sessionStorage.length - 1} items in your cart`;
+                    document.body.appendChild(paragraph);
+                }
+            }
+        }
+    </script>
+
+</head>
+
+<body></body>
+
+</html>
