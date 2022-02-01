@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Task 3</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous">
+        </script>
+
+    <script type="application/javascript">
+        window.onload = function () {
+            $("body").append($("<div></div>"))
+            $("div").first().append($("<h2></h2>").text("Login to the website"))
+            $("div").first().append($('<input type="text" id="firstname">'));
+            $("div").first().append($('<input type="text" id="email">'));
+            $("div").first().append($('<button></button>').text("Log me in").click(
+                () => { setCookies() }
+                ))
+            function setCookies() {
+                const d = new Date();
+                d.setTime(d.getTime() + (10 * 24 * 60 * 60 * 1000));
+                let expires = "expires=" + d.toUTCString();
+                document.cookie = `firstname=${$("#firstname").val()}; ${expires}`;
+                document.cookie = `email=${$("#email").val()}; ${expires}`;
+                console.log(expires)
+            }
+            function showCookies() {
+                const paragraph = document.createElement("p");
+                email_cookie = getCookie("email");
+                firstname_cookie = getCookie("firstname");
+                paragraph.innerHTML = `Email: ${email_cookie} - Firstname: ${firstname_cookie}`;
+                document.body.appendChild(paragraph);
+            }
+            function getCookie(name) {
+                let name2 = name + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name2) == 0) {
+                        return c.substring(name2.length, c.length);
+                    }
+                }
+                return "";
+            }
+            function showForm() {
+                $("h1").remove();
+                $("div").show()
+            }
+            function hideForm() {
+                $("div").hide()
+            }
+            function deleteCookiesAndShowForm() {
+                document.cookie = "firstname= ; expires=Thu, 01 Jan 1970 00:00:00 GTM;";
+                document.cookie = "email= ; expires=Thu, 01 Jan 1970 00:00:00 GTM;";
+                showForm()
+            }
+            function showWelcomeMessageOrForm() {
+                let user = getCookie("firstname");
+                if (user != "") {
+                    hideForm();
+                    $("body").append($("<h1></h1>").text(`Welcome: ${user}`));
+                    $("h1").append($('<a href="#"></a>').text(`(logout)`).css(
+                        { "font-weight": "normal", "font-style": "italic", "padding-left": "10px", "text-decoration": "none", "color": "black"}).click(
+                            () => {
+                                deleteCookiesAndShowForm();
+                            }
+                        ));
+                } else {
+                    showForm();
+                }
+            }
+            showWelcomeMessageOrForm()
+        }
+    </script>
+
+</head>
+
+<body></body>
+
+</html>
