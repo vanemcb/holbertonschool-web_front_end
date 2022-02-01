@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Task 4</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+    <script type="application/javascript">
+        window.onload = function () {
+            $("body").append($("<div></div>"))
+            $("div").first().append($("<h2></h2>").text("Login to the website"))
+            $("div").first().append($('<input type="text" id="firstname">'));
+            $("div").first().append($('<input type="text" id="email">'));
+            $("div").first().append($('<button></button>').text("Log me in").click(
+                () => { setCookiesAndShowWelcomeMessage() }
+                ))
+            function setCookiesAndShowWelcomeMessage() {
+                Cookies.set('firstname', $("#firstname").val(), { expires: 10 })
+                Cookies.set('email', $("#email").val(), { expires: 10 })
+                showWelcomeMessageOrForm()
+            }
+            function showForm() {
+                $("h1").remove();
+                $("div").show()
+            }
+            function hideForm() {
+                $("div").hide()
+            }
+            function deleteCookiesAndShowForm() {
+                Cookies.remove("firstname")
+                Cookies.remove("email")
+                showForm()
+            }
+            function showWelcomeMessageOrForm() {
+                let user = Cookies.get('firstname');
+                if (user != "" && user != undefined) {
+                    hideForm();
+                    $("body").append($("<h1></h1>").text(`Welcome: ${user}`));
+                    $("h1").append($('<a href="#"></a>').text(`(logout)`).css(
+                        { "font-weight": "normal", "font-style": "italic", "padding-left": "10px", "text-decoration": "none", "color": "black"}).click(
+                            () => {
+                                deleteCookiesAndShowForm();
+                            }
+                        ));
+                } else {
+                    showForm();
+                }
+            }
+            showWelcomeMessageOrForm()
+        }
+    </script>
+
+</head>
+
+<body></body>
+
+</html>
