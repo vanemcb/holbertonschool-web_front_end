@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Task 2</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous">
+        </script>
+
+    <script type="application/javascript">
+        window.onload = function () {
+            $("body").append($("<h1></h1>").text("Login to the website"))
+            $("body").append($('<input type="text" id="firstname">'));
+            $("body").append($('<input type="text" id="email">'));
+            $("body").append($('<button></button>').text("Log me in").click(
+                () => { setCookies() }
+                ))
+            $("body").append($("<h1></h1>").text("Cookies"))
+            $("body").append($('<button></button>').text("Show the cookies").click(
+                () => { showCookies() }
+            ))
+            function setCookies() {
+                const d = new Date();
+                d.setTime(d.getTime() + (10 * 24 * 60 * 60 * 1000));
+                let expires = "expires=" + d.toUTCString();
+                document.cookie = `firstname=${$("#firstname").val()}; ${expires}`;
+                document.cookie = `email=${$("#email").val()}; ${expires}`;
+            }
+            function showCookies() {
+                const paragraph = document.createElement("p");
+                email_cookie = getCookie("email");
+                firstname_cookie = getCookie("firstname");
+                paragraph.innerHTML = `Email: ${email_cookie} - Firstname: ${firstname_cookie}`;
+                document.body.appendChild(paragraph);
+            }
+            function getCookie(name) {
+                let name2 = name + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name2) == 0) {
+                        return c.substring(name2.length, c.length);
+                    }
+                }
+                return "";
+            }
+        }
+    </script>
+
+</head>
+
+<body></body>
+
+</html>
